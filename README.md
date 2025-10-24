@@ -19,11 +19,11 @@ The course is divided into several lessons, each focusing on a specific topic. B
 ## Lessons and learning objectives
 
 The following lessons are covered: 
-- Lesson 1: [Plinth introduction and features](lessons/lesson-1.adoc)
-- Lesson 2: [Setting up a Plinth development environment](lessons/lesson-2.adoc)
-- Lesson 3: [Simple validation scripts](lessons/lesson-3.adoc)
-- Lesson 4: [Script context explained](lessons/lesson-4.adoc)
-- Lesson 5: [Time-dependent and parameterized validators](lessons/lesson-5.adoc)
-- Lesson 6: [Off-chain code with MeshJS](lessons/lesson-6.adoc)
-- Lesson 7: [Minting policies and native tokens](lessons/lesson-7.adoc)
+- Lesson 1: [Plinth introduction and features](lessons/lesson-1.md)
+- Lesson 2: [Setting up a Plinth development environment](lessons/lesson-2.md)
+- Lesson 3: [Simple validation scripts](lessons/lesson-3.md)
+- Lesson 4: [Script context explained](lessons/lesson-4.md)
+- Lesson 5: [Time-dependent and parameterized validators](lessons/lesson-5.md)
+- Lesson 6: [Off-chain code with MeshJS](lessons/lesson-6.md)
+- Lesson 7: [Minting policies and native tokens](lessons/lesson-7.md)
 - [Further learning resources](lessons/learning-resources.md)
