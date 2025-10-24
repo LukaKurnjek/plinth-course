@@ -3,16 +3,15 @@
 For your development environment, you can use one of the following
 options:
 
-* Run a Nix(((Nix))) shell that contains all the dependencies
-* Run a local Docker(((Docker))) container inside VSCode
+* Run a Nix shell that contains all the dependencies
+* Run a local Docker container inside VSCode
 * Use an online platform such as https://demeter.run/[Demeter.run]
 * Install system dependencies manually.
 
 The https://github.com/IntersectMBO/plinth-template/tree/main[plinth-template]
 GitHub repository provides instructions for the above mentioned options.
-The smart contract code presented throughout section 
-<<chapter8-plutus-smart-contracts, Plutus smart contracts>>
-uses features introduced in the Chang hard fork(((hard fork, Chang))), which
+The smart contract code presented throughout this course
+uses features introduced in the Chang hard fork, which
 enabled PlutusV3. The development environment you will use to run and test
 this code needs to support these features. The smart contract code was compiled
 with a Nix shell. Nix version `2.25.3` was used and a Nix shell provided by
@@ -30,7 +29,7 @@ security, and version upgrades. Depending on development needs, the
 platform provides various starter kits, including example code
 repositories from the community for learning or project initiation. Its
 pricing model is based on service usage, with users also able to access
-some free working time. Explore _Developer Tools_ and _Infrastructure_ sections
+some free working time. Explore also _Developer Tools_ and _Infrastructure_ sections
 on the https://www.cardanocube.com/cardano-ecosystem-interactive-map[Cardano
 developer map] for more options.
 
@@ -49,16 +48,14 @@ documentation are distributed via the
 https://github.com/IntersectMBO/cardano-haskell-packages[Cardano
 Haskell package repository] (CHaP), which contains packages not hosted
 on https://hackage.haskell.org/[Hackage] – the central archive for Haskell packages.
-Other compiled languages(((language, compiled))) provide their own libraries
+Other compiled languages provide their own libraries
 that implement Plutus types. One example is the Aiken
 https://aiken-lang.github.io/stdlib/[standard library].
 
 Plinth data types cannot be explored in the standard GHCi REPL. The
-GHC compiler(((GHC, compiler))) pipeline first compiles Plinth code to an intermediate
-language called GHC Core(((GHC, core))). The Plutus compiler then takes this
+GHC compiler pipeline first compiles Plinth code to an intermediate
+language called GHC Core. The Plutus compiler then takes this
 GHC Core and with some intermediate steps compiles it to Untyped Plutus Core
-(UPLC). The compilation pipeline is further explained in section 
-<<chapter8-plutus-security, Plutus security>>.
-Additionally, the Plinth libraries are not hosted on Hackage, which means the only way
-to query Plinth types from a REPL is to build it with a Cabal file that imports
-those libraries.
+(UPLC). Additionally, the Plinth libraries are not hosted on Hackage, 
+which means the only way to query Plinth types from a REPL is to build it 
+with a Cabal file that imports those libraries.
