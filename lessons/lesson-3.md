@@ -15,10 +15,10 @@ the type of the script context, there are two possible implementations of
 a Plinth validation script:
 
 * In the low-level implementation, the script context is represented
-using the BuiltinData type, and the return value is of type
-BuiltinUnit.
+using the <span style="color: purple;">BuiltinData</span> type,
+and the return value is of type <span style="color: purple;">BuiltinUnit</span>.
 * In the high-level implementation, the script context is represented as
-a predefined Haskell type, and the return value is of type Bool.
+a predefined Haskell type, and the return value is of type <span style="color: purple;">Bool</span>.
 
 Below you can see two example validation script type signatures, one
 low-level and one high-level:
@@ -36,7 +36,7 @@ _typed validation scripts_.
 
 The BuiltinData doesn’t have its constructors exposed. The module
 that defines BuiltinData contains two conversion functions:
-builtinDataToData and dataToBuiltinData, that can
+<span style="color: blue;">builtinDataToData</span> and dataToBuiltinData, that can
 convert BuiltinData back and forth to the Data type. These functions
 can be used in off-chain code, but not in on-chain code. The Data type has
 its constructor exposed, as illustrated in the code below:
