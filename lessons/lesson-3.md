@@ -15,8 +15,8 @@ the type of the script context, there are two possible implementations of
 a Plinth validation script:
 
 * In the low-level implementation, the script context is represented
-using the <span style="color: purple;">BuiltinData</span> type,
-and the return value is of type <span style="color: purple;">BuiltinUnit</span>.
+using the <span style="color: purple;">BuiltinData</span> type, and the return value is of type
+<span style="color: purple;">BuiltinUnit</span>.
 * In the high-level implementation, the script context is represented as
 a predefined Haskell type, and the return value is of type <span style="color: purple;">Bool</span>.
 
@@ -34,11 +34,11 @@ offering better performance. Low-level validation scripts are referred
 to as _untyped validation scripts_, while high-level scripts are known as
 _typed validation scripts_.
 
-The BuiltinData doesn’t have its constructors exposed. The module
-that defines BuiltinData contains two conversion functions:
-<span style="color: blue;">builtinDataToData</span> and dataToBuiltinData, that can
-convert BuiltinData back and forth to the Data type. These functions
-can be used in off-chain code, but not in on-chain code. The Data type has
+The <span style="color: purple;">BuiltinData</span> doesn’t have its constructors exposed. The module
+that defines <span style="color: purple;">BuiltinData</span> contains two conversion functions:
+<span style="color: blue;">builtinDataToData</span> and <span style="color: blue;">dataToBuiltinData</span>, that can
+convert <span style="color: purple;">BuiltinData</span> back and forth to the <span style="color: purple;">Data</span> type. These functions
+can be used in off-chain code, but not in on-chain code. The <span style="color: purple;">Data</span> type has
 its constructor exposed, as illustrated in the code below:
 
 ```haskell
@@ -150,7 +150,7 @@ serializedMkGiftValidator = serialiseCompiledCode compiledMkGiftValidator
 The long list of language pragmas, GHC compiler options, and import statements
 is necessary to cover the functionality for all validators presented in this 
 lesson. From the language pragmas, we note that
-we add the NoImplicitPrelude extension that prevents the standard
+we add the <span style="color: purple;">NoImplicitPrelude</span> extension that prevents the standard
 `Prelude` module from being imported. The `PlutusTx` module defines a custom
 prelude where all functions use strict evaluation rather than lazy evaluation.
 This also applies to all other functions defined in any module used for
@@ -166,12 +166,12 @@ Next, we import several submodules from the `PlutusLedgerApi` and the `PlutusTx`
 modules that define functions for working with PlutusV3 scripts.
 
 After that, the on-chain validator code follows. We name the validator function
-mkGiftValidator -- which means _make gift validator_. It is an untyped validator
+<span style="color: blue;">mkGiftValidator</span> -- which means _make gift validator_. It is an untyped validator
 that always succeeds. It takes in the script context as the only argument, which is
-of type BuiltinData, and returns something of type BuiltinUnit.
-In the body of the function, the script context is ignored, and we use the check
-function which takes a value of type Bool, and returns a value of type
-BuiltinUnit if the input argument is true, or raises an error if it is false.
+of type <span style="color: purple;">BuiltinData</span>, and returns something of type <span style="color: purple;">BuiltinUnit</span>.
+In the body of the function, the script context is ignored, and we use the <span style="color: blue;">check</span>
+function which takes a value of type <span style="color: purple;">Bool</span>, and returns a value of type
+<span style="color: purple;">BuiltinUnit</span> if the input argument is true, or raises an error if it is false.
 
 ```haskell
 check :: Bool -> BI.BuiltinUnit
@@ -183,43 +183,42 @@ unitval = BuiltinUnit ()
 data BuiltinUnit = BuiltinUnit ~() deriving stock Data
 ```
 
-The check function returns the unitval variable that is a
+The <span style="color: blue;">check</span> function returns the <span style="color: blue;">unitval</span> variable that is a
 wrapper around the unit (empty tuple) type. The unit type in Haskell (`()`)
 indicates that a function returns no specific meaningful value, similar to `void`
-in languages like Java or C++. If an untyped validator returns the BuiltinUnit
+in languages like Java or C++. If an untyped validator returns the <span style="color: purple;">BuiltinUnit</span>
 type the validation logic passes, and if an error is raised, the validation
 logic fails. It is now clear why this validator is called `Gift` – anyone can
 claim funds from this address, since the validation will always succeed.
 
-Next, we compile the validator. We use the PlutusTx.compile function
+Next, we compile the validator. We use the <span style="color: blue;">PlutusTx.compile</span> function
 that takes a syntax tree of a function as input, which we can get if we put the
-Oxford brackets [||mkGiftValidator||] around the validator function. The
-compile function produces another syntax tree written in the Plutus
-language. Then the $$ symbol, called splice, takes a syntax tree and splices
+Oxford brackets <span style="color: blue;">[||mkGiftValidator||]</span> around the validator function. The
+<span style="color: blue;">compile</span> function produces another syntax tree written in the Plutus
+language. Then the <span style="color: blue">$$</span> symbol, called splice, takes a syntax tree and splices
 it back to Haskell source code. The splice operator and the Oxford
-brackets can be used because we added the TemplateHaskell language
+brackets can be used because we added the <span style="color: purple;">TemplateHaskell</span> language
 pragma, which enables this language extension.
 
 It is important to note that normally in Oxford brackets, you cannot
 reference anything defined outside of them. This can become an issue
 when validator functions are long expressions or when library functions
 are called within their body. A workaround is to make the function
-inlinable. By adding the INLINABLE pragma statement before or
+inlinable. By adding the <span style="color: purple;">INLINABLE</span> pragma statement before or
 after the function definition, the GHC compiler replaces the function call
 in the Oxford brackets with the actual function body.
 
-This completes the on-chain code. Next, we use the serialiseCompiledCode
-helper function that returns something of type ShortByteString, which
-is a compact representation of a Word8 vector (8-bit unsigned integer type).
+This completes the on-chain code. Next, we use the <span style="color: blue;">serialiseCompiledCode</span>
+helper function that returns something of type <span style="color: purple;">ShortByteString</span>, which
+is a compact representation of a <span style="color: purple;">Word8</span> vector (8-bit unsigned integer type).
 At the end of this section, we present the code that lets us generate
 [Plutus blueprints](https://cips.cardano.org/cip/CIP-57)
 for all the validators presented in this section. Plutus blueprints allow documenting
 Plutus validators in `JSON` format and include the compiled validator code that is
-represented as a `CBORHEX`. The
-[Concise Binary Object Representation](https://en.wikipedia.org/wiki/CBOR)
-(`CBOR`) is a binary data serialization format loosely based
+represented as a `CBORHEX`. The 
+[Concise Binary Object Representation](https://en.wikipedia.org/wiki/CBOR) (`CBOR`) is a binary data serialization format loosely based
 on `JSON`. The `CBORHEX` is a hexadecimal representation of this data format.
-For our mkGiftValidator the blueprint will show the following `CBORHEX`:
+For our <span style="color: blue;">mkGiftValidator</span> the blueprint will show the following `CBORHEX`:
 
 ```json
 "compiledCode": "450101002499"
@@ -245,16 +244,16 @@ serializedMkBurnValidator :: SerialisedScript
 serializedMkBurnValidator = serialiseCompiledCode compiledMkBurnValidator
 ```
 
-We call the validator mkBurnValidator, since no funds can be reclaimed from
-the contract once sent. The traceError function can produce an
+We call the validator <span style="color: blue;">mkBurnValidator</span>, since no funds can be reclaimed from
+the contract once sent. The <span style="color: blue;">traceError</span> function can produce an
 error and log a message displayed by the failed off-chain code transaction
 that tries to claim any funds from this script address. Also, in this case, we ignore
 the entire script context. Then we compile the validator and serialize it. We could
-also use the check function with a `False` argument; in that scenario, the
+also use the <span style="color: blue;">check</span> function with a `False` argument; in that scenario, the
 validation would still fail, but no custom error message would be logged.
 
 Next, we show an example where we make use of the redeemer in the validation logic.
-The redeemer type is defined as a wrapper around the BuiltinData data type:
+The redeemer type is defined as a wrapper around the <span style="color: purple;">BuiltinData</span> data type:
 
 ```haskell
 newtype Redeemer = Redeemer {getRedeemer :: BuiltinData}
@@ -292,18 +291,18 @@ serializedMk42ValidatorLarge = serialiseCompiledCode compiledMk42ValidatorLarge
 ```
 
 In the example above, we first convert the untyped script context to its
-typed form using the fromBuiltinData function. It takes in
-a variable of type BuiltinData and returns a Maybe type parameterized
+typed form using the <span style="color: blue;">fromBuiltinData</span> function. It takes in
+a variable of type <span style="color: purple;">BuiltinData</span> and returns a <span style="color: purple;">Maybe</span> type parameterized
 with a type variable. If that type variable is a type that has an instance of the
-FromData type class, then the conversion will succeed. Otherwise, the function returns
-Nothing. You can find class instances for various Plutus types in the Plutus
+<span style="color: purple;">FromData</span> type class, then the conversion will succeed. Otherwise, the function returns
+<span style="color: purple;">Nothing</span>. You can find class instances for various Plutus types in the Plutus
 [Haddock documentation](https://plutus.cardano.intersectmbo.org/haddock/latest/).
-There also exists the unsafeFromBuiltinData function that is defined in the
-UnsafeFromData type class. This function directly returns a type variable
-instead of wrapping it in a Maybe type. If the conversion fails,
+There also exists the <span style="color: blue;">unsafeFromBuiltinData</span> function that is defined in the
+<span style="color: blue;">UnsafeFromData</span> type class. This function directly returns a type variable
+instead of wrapping it in a <span style="color: purple;">Maybe</span> type. If the conversion fails,
 the function raises an error, and the validation logic fails. We call it _unsafe_
 since the conversion might fail with an error. Below
-you can see the FromData and UnsafeFromData type classes.
+you can see the <span style="color: purple;">FromData</span> and <span style="color: purple;">UnsafeFromData</span> type classes.
 
 ```haskell
 class FromData a where
@@ -314,17 +313,17 @@ class UnsafeFromData a where
 ```
 
 Once we have the script context in typed form, we can access the redeemer,
-a wrapper around the BuiltinData type. Then we again try to convert
-that type, in this case to an Integer. Now that the redeemer is in the
-correct form, we can simply check if it is equal to 42 and return the unitval
-variable or raise an error and log a message. We could also use the check
+a wrapper around the <span style="color: purple;">BuiltinData</span> type. Then we again try to convert
+that type, in this case to an <span style="color: purple;">Integer</span>. Now that the redeemer is in the
+correct form, we can simply check if it is equal to 42 and return the <span style="color: blue;">unitval</span>
+variable or raise an error and log a message. We could also use the <span style="color: blue;">check</span>
 function as we did in our previous examples. After that, we compile and serialize
 the validator.
 
 The reason why we stated _"large CBOR"_ in the comment above the code is that
 converting the script context into a typed form is a costly operation and produces
 a large CBOR. Next, let us look at the same validator in untyped form, where
-we decode the script by keeping it in the form of the BuiltinData type.
+we decode the script by keeping it in the form of the <span style="color: purple;">BuiltinData</span> type.
 At the end of this section, we will compare `CBORHEX` lengths for
 all validators presented in this section that check if the redeemer equals 42.
 
@@ -359,22 +358,22 @@ serializedMk42ValidatorSmall :: SerialisedScript
 serializedMk42ValidatorSmall = serialiseCompiledCode compiledMk42ValidatorSmall
 ```
 
-First, we define a function called constrArgs that helps us to
-convert the BuiltinData to the BuiltinList type. We
+First, we define a function called <span style="color: blue;">constrArgs</span> that helps us to
+convert the <span style="color: purple;">BuiltinData</span> to the <span style="color: purple;">BuiltinList</span> type. We
 recall that the script context is an algebraic product data type that
 combines the transaction information, redeemer, and script information types.
 Once we have converted the script context to a built-in list, we can use the
-tail and head functions to extract the needed element.
+<span style="color: blue;">tail</span> and <span style="color: blue;">head</span> functions to extract the needed element.
 In the case of the script context, the redeemer is in the second place, so
-we first apply the tail function and then the head function.
-Once we have the redeemer in the form of BuiltinData, we can use
-the unsafeDataAsI that converts it to an integer. It is called
+we first apply the <span style="color: blue;">tail</span> function and then the <span style="color: blue;">head</span> function.
+Once we have the redeemer in the form of <span style="color: purple;">BuiltinData</span>, we can use
+the <span style="color: blue;">unsafeDataAsI</span> that converts it to an integer. It is called
 _unsafe_ because it raises an error if the conversion fails. Next, we
 compile and then serialize the validator.
 
 We note that if the redeemer were a more structured algebraic
-data type, we could further decode it with the constrArgs, tail
-and head functions, or we could use the fromBuiltinData function
+data type, we could further decode it with the <span style="color: blue;">constrArgs</span>, <span style="color: blue;">tail</span>
+and <span style="color: blue;">head</span> functions, or we could use the <span style="color: blue;">fromBuiltinData</span> function
 to convert it to its typed form and access the elements we need.
 
 Let us look now at the same validator that is written in a typed form.
@@ -406,15 +405,15 @@ The type signature now changes to `ScriptContext -> Bool`, which means
 the validator succeeds if the logic returns `True` and fails if it returns
 `False`. We can now access the redeemer directly from the script context
 in its typed form and then try to convert the data inside the redeemer from
-BuiltinData to Integer. To compile this typed validator,
-we need to wrap it with a function that accepts BuiltinData for its
-argument. We use the unsafeFromBuiltinData that converts the
+<span style="color: purple;">BuiltinData</span> to <span style="color: purple;">Integer</span>. To compile this typed validator,
+we need to wrap it with a function that accepts <span style="color: purple;">BuiltinData</span> for its
+argument. We use the <span style="color: blue;">unsafeFromBuiltinData</span> that converts the
 script context from its untyped form to typed, and then apply the
-mk42TypedValidator and check functions. After that, we can
+<span style="color: blue;">mk42TypedValidator</span> and <span style="color: blue;">check</span> functions. After that, we can
 compile the wrapped validator and serialize it.
 
 At the end, we can look at one final validator example where we define
-a custom redeemer type that is a wrapper around an Integer type.
+a custom redeemer type that is a wrapper around an <span style="color: purple;">Integer</span> type.
 In the body of the validator we again match the integer number to 42.
 
 ```haskell
@@ -448,22 +447,22 @@ serializedMk42CustomValidator :: SerialisedScript
 serializedMk42CustomValidator = serialiseCompiledCode compiledMk42CustomValidator
 ```
 
-Here, we first define the custom data type MySillyRedeemer
-which is a wrapper around the Integer type. Then we use the
-makeIsDataSchemaIndexed function that generates the ToData,
-FromData, UnsafeFromData and HasBlueprintSchema
+Here, we first define the custom data type <span style="color: purple;">MySillyRedeemer</span>
+which is a wrapper around the <span style="color: purple;">Integer</span> type. Then we use the
+<span style="color: blue;">makeIsDataSchemaIndexed</span> function that generates the <span style="color: purple;">ToData</span>,
+<span style="color: purple;">FromData</span>, <span style="color: purple;">UnsafeFromData</span> and <span style="color: purple;">HasBlueprintSchema</span>
 instances for our custom type, which contain functions for converting our custom
-data type to the Data type back and forth. We use template Haskell,
+data type to the <span style="color: purple;">Data</span> type back and forth. We use template Haskell,
 which requires adding two single quotes in front of the type to refer to the
 type itself, allowing Template Haskell to generate the necessary instances.
 After we have defined our redeemer type, we write the
 validator logic in the same way as in the previous example, just that we now
-convert the redeemer from BuiltinData to the MySillyRedeemer
+convert the redeemer from <span style="color: purple;">BuiltinData</span> to the <span style="color: purple;">MySillyRedeemer</span>
 type. We compile and serialize the validator in the same way as in the previous example.
 
 Altogether, we have defined four different variants for the validator that 
 matches the redeemer to the number 42. We note that if we were to import the
-ScriptContext data type from the
+<span style="color: purple;">ScriptContext</span> data type from the
 `PlutusLedgerApi.Data.V3` module instead of the `PlutusLedgerApi.V3` module,
 the `CBORHEX` lengths decrease by around 10%. The table below shows compiled
 code lengths for the four validators and for the two different `PlutusLedgerApi`
@@ -478,30 +477,30 @@ modules we can use.
 | Typed (custom type redeemer) | 6066 | 5428 | 10.5% |
 
 We see that we get, by far, the most compact compiled code if we decode the
-ScriptContext in its untyped form and then convert the part we need
+<span style="color: purple;">ScriptContext</span> in its untyped form and then convert the part we need
 to typed form. We call that lazy decoding. This also brings an on-chain code
 performance advantage. We get the largest `CBORHEX` for the untyped
-validator, where we convert the entire ScriptContext into typed form
+validator, where we convert the entire <span style="color: purple;">ScriptContext</span> into typed form
 in the body of the validator. The reason is this type carries much information
 and converting the whole type into typed form is a costly operation.
 
-The reason the compiled code is shorter if we import the ScriptContext
+The reason the compiled code is shorter if we import the <span style="color: purple;">ScriptContext</span>
 from the `PlutusLedgerApi.Data.V3` module is that module provides an alternative
-interface that works directly with the Plutus Core Data
+interface that works directly with the Plutus Core <span style="color: purple;">Data</span>
 type under the hood. Due to Plutus updates, data types can now be thin wrappers
-over the BuiltinData
+over the <span style="color: purple;">BuiltinData</span>
 type, which allows retaining the user-friendliness of the data type version while also
-avoiding the upfront cost of decoding the BuiltinData into sums of products.
-We call a data type _data-backed_ if it is representationally equivalent to BuiltinData.
+avoiding the upfront cost of decoding the <span style="color: purple;">BuiltinData</span> into sums of products.
+We call a data type _data-backed_ if it is representationally equivalent to <span style="color: purple;">BuiltinData</span>.
 
-Since Plutus now provides a way to deal directly with the Data type
+Since Plutus now provides a way to deal directly with the <span style="color: purple;">Data</span> type
 for all Plutus script versions (V1, V2, and V3), developers can move away from sums of
 products or Scott encoding. The
 [Plinth user guide](https://plutus.cardano.intersectmbo.org/docs/working-with-scripts/optimizing-scripts-with-asData)
 provides instructions on how to optimize scripts with the `PlutusTx.asData`
 module that contains Template Haskell (TH) code for encoding algebraic data
 types (ADTs) as `Data` objects in Plutus Core such that they become _data-backed_
-types. The `PlutusLedgerApi.Data.V3` module already contains the ScriptContext
+types. The `PlutusLedgerApi.Data.V3` module already contains the <span style="color: purple;">ScriptContext</span>
 in the form of a _data-backed_ type. Also, one can look at the
 [Simplifying code before compilation](https://plutus.cardano.intersectmbo.org/docs/working-with-scripts/simplifying-before-compilation)
 and [Other optimization techniques](https://plutus.cardano.intersectmbo.org/docs/working-with-scripts/other-optimization-techniques) guidelines.
@@ -577,11 +576,11 @@ preamble =
 
 We first define all language pragmas and import the necessary modules, including the
 `Week02.Validators` module, where we have defined our validators from this section.
-In the main function, we write the blueprint to a `JSON` file, and after
+In the <span style="color: blue;">main</span> function, we write the blueprint to a `JSON` file, and after
 that, the blueprint definition. It contains the contract ID, the preamble
 that defines some general information, the contract validators, defined next,
 and the contract definitions. The definitions include a list of types
-that we have used in the validator code. After that, we see the preamble
+that we have used in the validator code. After that, we see the <span style="color: blue;">preamble</span>
 definition. Next, we show the validator blueprint
 definitions for two validators that we have chosen.
 
