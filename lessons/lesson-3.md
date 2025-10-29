@@ -72,7 +72,7 @@ The script context contains:
 * script information (defines the purpose of the script, such as spending or minting;
 for a spending script, the script information potentially contains a datum).
 
-We will look into those data types in more detail in lesson 4
+We will look into those data types in more detail in lesson
 _Script context explained_. If a transaction tries to spend multiple UTXOs
 at a script address, the spending script is run for every UTXO individually.
 The redeemer and the script information are individually assigned for every

@@ -1,6 +1,6 @@
 ==== Script context explained
 
-In this section, we will examine the [purple]#ScriptContext# data type in more detail.
+In this lesson, we will examine the [purple]#ScriptContext# data type in more detail.
 All data types contained in the script context will be presented as Haskell data types.
 Let us recall the implementation of the script context data type.
 
@@ -15,14 +15,14 @@ data ScriptContext = ScriptContext
   deriving anyclass (HasBlueprintDefinition)
 ----
 
-It contains transaction information, the redeemer, and script information(((script, information))).
+It contains transaction information, the redeemer, and script information.
 To reiterate: if a transaction attempts to spend multiple UTXOs at a script address, the spending
 script is executed separately for each UTXO. The redeemer and script information
 are assigned individually to each UTXO, whereas the transaction information
 is shared across all scripts triggered by that transaction.
 
-In the previous code examples, the validation logic did not use the transaction and script
-information. However, in most validator scripts, they are
+In the code examples from the previous lesson, the validation logic did not use
+the transaction and script information. However, in most validator scripts, they are
 used. First, we look at the script information data type.
 
 ===== Script information
@@ -47,7 +47,7 @@ data ScriptInfo
   deriving (Pretty) via (PrettyShow ScriptInfo)
 ----
 
-The script information(((script, information))) contains information about the
+The script information contains information about the
 script's purpose. If a transaction tries to mint a native asset, the script info
 contains the [purple]#MintingScript# data constructor that carries the
 [purple]#CurrencySymbol# data type.
@@ -65,15 +65,13 @@ newtype CurrencySymbol = CurrencySymbol {unCurrencySymbol :: PlutusTx.BuiltinByt
 ----
 
 The currency symbol data type is wrapped around a [purple]#BuiltinByteString#,
-which represents the hash of the minting policy(((minting policy))) that gets
+which represents the hash of the minting policy that gets
 triggered when minting a native asset. We will talk more about native assets
-and minting in section <<chapter8-minting-policies-and-native-tokens,
-Minting policies and native tokens>>.
+and minting in lesson _Minting policies and native tokens_.
 
 If a transaction tries to spend a UTXO at a script address, the script
 info contains the [purple]#SpendingScript# data constructor that carries
-a transaction output reference(((transaction, output reference)))
-[purple]#TxOutRef# and a [purple]#Maybe V2.Datum#.
+a transaction output reference [purple]#TxOutRef# and a [purple]#Maybe V2.Datum#.
 
 [source,haskell]
 ----
@@ -85,10 +83,10 @@ data TxOutRef = TxOutRef
   deriving anyclass (NFData, HasBlueprintDefinition)
 ----
 
-The transaction output reference contains the transaction ID(((transaction, ID))),
+The transaction output reference contains the transaction ID,
 which is a SHA-256 hash of the transaction, and the transaction index, which is an integer number.
 Each UTXO that a transaction creates gets a transaction index assigned starting with
-zero and increasing by one. Because a transaction hash(((transaction, hash))) (ID) is unique,
+zero and increasing by one. Because a transaction hash (ID) is unique,
 together with the output index it uniquely defines a UTXO.
 The reason transaction hashes are unique is because a new transaction hash includes
 the hash of the transaction that created the UTXO being consumed. Every transaction consumes
@@ -96,7 +94,7 @@ at least one UTXO as it needs to pay some fees. By a simple inductive
 argument, it follows that two identical transaction hashes can never exist.
 We also rely on the fact that the probability of a hash collision is negligible.
 
-The [purple]#TxId# data type that represents an SHA-256 hash(((SHA-256 hash)))
+The [purple]#TxId# data type that represents an SHA-256 hash
 of the transaction is a wrapper around a [purple]#BuiltinByteString#.
 
 [source,haskell]
@@ -109,7 +107,7 @@ newtype TxId = TxId {getTxId :: PlutusTx.BuiltinByteString}
     via LedgerBytes
 ----
 
-For PlutusV3 scripts, a datum(((datum))) is no longer necessary to be attached to a UTXO
+For PlutusV3 scripts, a datum is no longer necessary to be attached to a UTXO
 when creating it at a script address, as was the case for PlutusV2 scripts.
 For this reason, the script info for a spending script contains a [purple]#Maybe Datum# type. 
 
@@ -129,8 +127,8 @@ logic. We note that the redeemer is defined when we construct a spending
 transaction that consumes one or more UTXOs at a script address, and the
 datum is defined when we construct a producing transaction that creates
 one or more UTXOs at a script address. We will see examples of how to
-construct producing and spending transactions in section
-<<chapter8-off-chain-code-with-meshjs, Off-chain code with MeshJS>>.
+construct producing and spending transactions in lesson
+_Off-chain code with MeshJS_.
 
 The third option for script purposes is rewarding, which is used to
 withdraw staking rewards. The rewarding constructor carries the
@@ -145,8 +143,8 @@ data Credential =
     deriving anyclass (NFData, HasBlueprintDefinition)
 ----
 
-This data type either contains a public key hash or a script hash(((script, hash))). In
-the case of a public key hash, the owner of the private key(((private key))) corresponding
+This data type either contains a public key hash or a script hash. In
+the case of a public key hash, the owner of the private key corresponding
 to the public key needs to sign the transaction to be able to spend the
 staking rewards. In the case of a script hash, the transaction must include
 or reference the validation script that will be used to decide whether
@@ -161,8 +159,7 @@ following script purposes:
 * Certifying - for issuing certificates
 * Voting and proposing - used when government actions are involved.
 
-In the <<chapter8-plutus-smart-contracts, Plutus smart contracts>> section,
-we will focus on the spending and minting script purposes.
+In this course code examples, we will focus on the spending and minting script purposes.
 
 ===== Decoding the script information in untyped form
 
@@ -170,7 +167,7 @@ Before moving on to explaining the transaction information data type, we look
 at another validator example that shows how to decode the [purple]#ScriptInfo#
 data type in untyped form. Our validator follows the same logic as the 42
 validator in the previous section, except that we now match the number 42
-to the value of the datum(((datum))) instead of the redeemer.
+to the value of the datum instead of the redeemer.
 
 [source,haskell]
 ----
@@ -206,18 +203,17 @@ serializedDatum42Validator :: SerialisedScript
 serializedDatum42Validator = serialiseCompiledCode compiledDatum42Validator
 ----
 
-As we explained in the previous section, we need to define the
+As we explained in the previous lesson, we need to define the
 [blue]#constrArgs# helper function that helps us to convert the [purple]#BuiltinData#
-to the [purple]#BuiltinList# type. The script information(((script, information)))
+to the [purple]#BuiltinList# type. The script information
 is contained in the third place in the script context. To extract an element from
 the third place in the list, we can apply two times the [blue]#tail# function
 and one time the [blue]#head# function.
 
 Since we are working with a spending script, the script info contains the spending
-constructor followed by the transaction output
-reference(((transaction, output reference))) and the [purple]#Maybe Datum# type. We use
-once the [blue]#tail# function and the [blue]#head# function to extract it. Because
-we now have something of type [purple]#Maybe V2.Datum#, we cannot directly convert
+constructor followed by the transaction output reference and the [purple]#Maybe Datum#
+type. We use once the [blue]#tail# function and the [blue]#head# function to extract it.
+Because we now have something of type [purple]#Maybe V2.Datum#, we cannot directly convert
 it to an integer. We again use the [blue]#constrArgs# function and then only once
 the [blue]#head# function since there should be only one element in the list - the datum.
 After that we have the datum in untyped form, and we can apply the
@@ -230,8 +226,7 @@ message. We note also in this example that if the datum is a more structured
 data type, we could use the [blue]#fromBuiltinData# function that would convert it
 to typed form, enabling simpler extraction of information.
 
-We again state the various possibilities that a datum can be used for
-in smart contracts:
+We state the various possibilities that a datum can be used for in smart contracts:
 
 * Indicating who can consume a UTXO, when, and under what conditions
 * Representing the current state of the UTXO
@@ -239,8 +234,7 @@ in smart contracts:
 
 ===== Transaction information
 
-Let us look at the transaction information(((transaction, information)))
-[purple]#TxInfo# data type.
+Let us look at the transaction information [purple]#TxInfo# data type.
 
 [source,haskell]
 ----
@@ -268,7 +262,7 @@ data TxInfo = TxInfo
 
 It contains several fields that carry information about the transaction
 being validated. In the beginning, it contains a list of transaction inputs
-and reference inputs(((reference inputs))). Reference inputs are inputs accessible by the script
+and reference inputs. Reference inputs are inputs accessible by the script
 context but not consumed by the transaction. They are only referenced, hence
 the name. A transaction may need access to a UTXO without consuming it
 because the UTXO's datum can contain important information that
@@ -278,9 +272,8 @@ contract compiled to Plutus. The advantage of reference scripts is that
 instead of appending a script to a transaction that wants to spend funds
 at the script address, we simply reference this script from the UTXO
 that carries it. This lowers the transaction size and reduces the
-transaction cost. A code example of this is presented in section
-<<chapter8-off-chain-code-with-meshjs, Off-chain code with MeshJS>>.
-Another advantage of reference inputs is
+transaction cost. A code example of this is presented in lesson
+_Off-chain code with MeshJS_. Another advantage of reference inputs is
 that several transactions in the same block can use the same UTXO as a
 reference input, since it is not being consumed by any of those transactions.
 Transaction inputs and reference inputs are lists of type transaction input
@@ -296,8 +289,7 @@ data TxInInfo = TxInInfo
   deriving anyclass (HasBlueprintDefinition)
 ----
 
-The transaction input information(((transaction, input information)))
-contains a transaction output reference(((transaction, output reference)))
+The transaction input information contains a transaction output reference
 that we previously explained. It defines the input UTXO and
 contains resolved transaction input information
 in the form of the transaction output [purple]#TxOut# data type.
@@ -315,7 +307,7 @@ data TxOut = TxOut
 ----
 
 A transaction output of a UTXO contains the address where this UTXO resides,
-the value it contains, the output datum, and possibly a script hash(((script, hash))).
+the value it contains, the output datum, and possibly a script hash.
 We look first at the [purple]#Address# type.
 
 [source,haskell]
@@ -328,12 +320,10 @@ data Address = Address
   deriving anyclass (NFData, HasBlueprintDefinition)
 ----
 
-As explained in section <<chapter8-cardano-security, Cardano addresses>>,
-an address has
-two parts: payment part and optional staking. The payment part,
-defined with the [purple]#Credential# data type, contains either a public
-key hash or a script hash, as we explained when discussing rewarding
-in the <<chapter8-script-information, Script information>> section.
+A Cardano address has two parts: the payment part and an optional staking part.
+The payment part, defined with the [purple]#Credential# data type, contains either
+a public key hash or a script hash, as we explained when discussing rewarding
+in the _Script information_ section of this lesson.
 
 The optional staking part is defined with the [purple]#StakingCredential#
 data type that can be either a staking hash or a staking pointer.
@@ -362,7 +352,7 @@ newtype Value = Value { getValue :: Map CurrencySymbol (Map TokenName Integer) }
     deriving Pretty via (PrettyShow Value)
 ----
 
-Every native token is defined with a currency symbol and a token name(((token name))). They are
+Every native token is defined with a currency symbol and a token name. They are
 both wrappers around a [purple]#BuiltinByteString#. The currency symbol is computed
 as the hash of the minting policy, and the token name can be an arbitrary string
 (but should not be longer than 32 bytes). The `ada` token is defined by an empty
@@ -382,13 +372,12 @@ data OutputDatum
 
 A UTXO can either contain no datum, a datum hash, or a datum. A datum hash
 contains a string of type [purple]#BuiltinByteString# and the datum type is a
-wrapper around the [purple]#BuiltinData# type -- just like the [purple]#Redeemer# type.
+wrapper around the [purple]#BuiltinData# type - just like the [purple]#Redeemer# type.
 
 The last data for the [purple]#TxOut# data type defines a [purple]#Maybe ScriptHash#.
-A script hash(((script, hash))) is also a wrapper around a [purple]#BuiltinByteString#.
+A script hash is also a wrapper around a [purple]#BuiltinByteString#.
 
-Next in the [purple]#TxInfo# data type are the transaction
-outputs(((transaction, output))) that the
+Next in the [purple]#TxInfo# data type are the transaction outputs that the
 transaction aims to create. A transaction output is defined with the [purple]#TxOut#
 data type that we have already shown. After that comes the data for fees and
 minting. Fees are defined with the [purple]#Lovelace# data type that is a
@@ -569,18 +558,17 @@ data ScriptPurpose
 
 The [purple]#ScriptPurpose# data type is structured in the same way as the
 [purple]#ScriptInfo# data type, except the constructor names are different
-and the _Spending_ constructor holds only a transaction output
-reference(((transaction, output reference))), without the [purple]#Maybe Datum# type.
-The keys for the datums are datum hashes that map to actual datums.
+and the _Spending_ constructor holds only a transaction output reference,
+without the [purple]#Maybe Datum# type. The keys for the datums are datum
+hashes that map to actual datums.
 
-Next comes the transaction ID(((transaction, ID))) of type
-[purple]#TxId#, which represents the
+Next comes the transaction ID of type [purple]#TxId#, which represents the
 hash of the transaction being validated. As already stated, this type is a
 wrapper around the [purple]#BuiltinByteString# data type.
 
-Next are the votes and proposal procedures used when
+Then are the votes and proposal procedures used when
 dealing with government actions. The last two pieces of data contained in
-the transaction information are the current treasury amount(((treasury, amount))) and treasury
+the transaction information are the current treasury amount and treasury
 donation. Both are of type [purple]#Maybe V2.Lovelace#. Learn more about
 governance features, including the topics of voting and proposal submission,
-in chapter <<chapter5-cardano-governance, Cardano governance>>.
+in the https://github.com/input-output-hk/mastering-cardano/blob/main/chapters/chapter-05-governance.adoc[Cardano governance] chapter of Mastering Cardano.
