@@ -159,7 +159,7 @@ In this course code examples, we will focus on the spending and minting script p
 Before moving on to explaining the transaction information data type, we look
 at another validator example that shows how to decode the <span style="color: purple;">ScriptInfo</span>
 data type in untyped form. Our validator follows the same logic as the 42
-validator in the previous section, except that we now match the number 42
+validator in the previous lesson, except that we now match the number 42
 to the value of the datum instead of the redeemer.
 
 ```haskell

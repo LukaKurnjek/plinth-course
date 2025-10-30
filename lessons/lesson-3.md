@@ -211,9 +211,9 @@ in the Oxford brackets with the actual function body.
 This completes the on-chain code. Next, we use the <span style="color: blue;">serialiseCompiledCode</span>
 helper function that returns something of type <span style="color: purple;">ShortByteString</span>, which
 is a compact representation of a <span style="color: purple;">Word8</span> vector (8-bit unsigned integer type).
-At the end of this section, we present the code that lets us generate
+At the end of this lesson, we present the code that lets us generate
 [Plutus blueprints](https://cips.cardano.org/cip/CIP-57)
-for all the validators presented in this section. Plutus blueprints allow documenting
+for the validators presented in this lesson. Plutus blueprints allow documenting
 Plutus validators in `JSON` format and include the compiled validator code that is
 represented as a `CBORHEX`. The 
 [Concise Binary Object Representation](https://en.wikipedia.org/wiki/CBOR) (`CBOR`) is a binary data serialization format loosely based
@@ -324,8 +324,8 @@ The reason why we stated _"large CBOR"_ in the comment above the code is that
 converting the script context into a typed form is a costly operation and produces
 a large CBOR. Next, let us look at the same validator in untyped form, where
 we decode the script by keeping it in the form of the <span style="color: purple;">BuiltinData</span> type.
-At the end of this section, we will compare `CBORHEX` lengths for
-all validators presented in this section that check if the redeemer equals 42.
+At the end of this lesson, we will compare `CBORHEX` lengths for
+all validators presented in this lesson that check if the redeemer equals 42.
 
 ```haskell
 {- ------------------------------------------------------------------------------ -}
@@ -515,7 +515,7 @@ to unlock funds held at a script address
 * Supplying a value that modifies the current datum value.
 
 Finally, we show the code for generating Plutus blueprints for two of the
-six validators we have defined in this section to shorten the code. We choose
+six validators we have defined in this lesson to shorten the code. We choose
 the gift validator and the untyped 42 validator that generates a small CBOR.
 
 ```haskell
@@ -575,7 +575,7 @@ preamble =
 ```
 
 We first define all language pragmas and import the necessary modules, including the
-`Week02.Validators` module, where we have defined our validators from this section.
+`Week02.Validators` module, where we have defined our validators from this lesson.
 In the <span style="color: blue;">main</span> function, we write the blueprint to a `JSON` file, and after
 that, the blueprint definition. It contains the contract ID, the preamble
 that defines some general information, the contract validators, defined next,
@@ -631,11 +631,11 @@ blueprint defines the validator title, description, parameters that are defined
 if we have a parameterized validator, redeemer information, datum information,
 and the compiled code, which we reference from the `Week02.Validators` module
 that we have imported. One can extend the blueprint code such that it generates
-the data and compiled code for all six validators that we defined in this section.
+the data and compiled code for all six validators that we defined in this lesson.
 All validators presented in this course can be found in the _code/_
 folder of this course, which also contains a `blueprint.json` file
 with all compiled validator code. Below is an example blueprint for the blueprint
-code we have defined in this section. The compiled validator code is contained in
+code we have defined in this lesson. The compiled validator code is contained in
 the `"compiledCode"` fields.
 
 ```json
