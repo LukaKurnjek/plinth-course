@@ -1,6 +1,6 @@
 ==== Time-dependent and parameterized validators
 
-This section demonstrates a smart contract representing a vesting
+This lesson demonstrates a smart contract representing a vesting
 schema. In this scenario, a person sends a gift of ada to the smart
 contract, and the beneficiary can reclaim this gift after a set deadline
 has passed. Such a contract can take two approaches, depending on how the
@@ -120,7 +120,7 @@ serializedVestingVal = serialiseCompiledCode compiledVestingVal
 
 In the beginning, we add all necessary language pragmas and import
 statements. The functions, types, and type classes we import are necessary
-to cover the functionality for both validators presented in this section.
+to cover the functionality for both validators presented in this lesson.
 We name the module `Week03.Vesting` since the idea for the vesting contract
 comes from the _Week03_ examples from the Plutus pioneer program.
 
@@ -130,7 +130,7 @@ after which the funds can be claimed. Because we are defining a custom data
 type, we need to use the [blue]#makeIsDataSchemaIndexed# function that generates
 the [purple]#ToData#, [purple]#FromData#, [purple]#UnsafeFromData#, and
 [purple]#HasBlueprintSchema# instances for our custom type. As stated in
-a previous section, we use Template Haskell, which requires adding two single
+a previous lesson, we use Template Haskell, which requires adding two single
 quotes in front of the type to return the type's name.
 
 Next comes the code for the validator. The validation logic says
@@ -144,7 +144,7 @@ that belongs to the hash. In the second variable, we access the transaction
 validity range and check whether it is contained inside the interval
 starting with the deadline and going to infinity. As a side note we state
 when the validity range for a transaction is being defined,
-the transaction gets submitted by a node only if the time of submission
+the transaction gets processed by a node only if the time of processing
 for this transaction falls into the validity range of the transaction.
 
 In the validator code, the datum gets extracted from the script context and
@@ -156,7 +156,7 @@ In the examples we have seen so far, the validators took in a single parameter,
 the script context, and returned a [purple]#Bool# or a [purple]#BuiltinUnit#. If
 there is any variability in the contract, we model that by using the datum as in
 the vesting example, which contained the beneficiary and the deadline. An alternative
-approach is to use parameterized contracts(((parameterized contract))),
+approach is to use parameterized contracts,
 where variability is integrated into the contract
 by adding a parameter variable to the validator function. The code below shows this,
 containing a modified version of the previous vesting code example.
@@ -245,5 +245,5 @@ serialized. When compiling the validator, another type parameter needs to be
 added to the type signatures, and we also need to apply the [blue]#unsafeFromBuiltinData#
 function to the vesting parameter in order to wrap the validator before compiling it.
 
-This concludes the procedure of writing a parameterized contract. Next, we look at
-off-chain code that interacts with the validators presented in this section.
+This concludes the procedure of writing a parameterized contract. In the next lesson
+we look at off-chain code that interacts with the validators presented in this lesson.
