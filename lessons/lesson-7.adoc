@@ -1,7 +1,7 @@
 ==== Minting policies and native tokens
 
-In Plutus, a minting policy(((minting policy))) or minting script defines the
-conditions under which native tokens(((native tokens))) can be minted. Each UTXO has an
+In Plutus, a minting policy or minting script defines the
+conditions under which native tokens can be minted. Each UTXO has an
 address, a value, and potentially a datum. In previous examples, the
 value was always ada. To include native tokens in a UTXO, they must be
 explicitly created.
@@ -10,8 +10,8 @@ blog on native tokens] states that on many blockchains, creating custom tokens
 traditionally requires writing and deploying smart contracts – code that
 defines how the token behaves and how it can be transferred, created (minted),
 or destroyed (burned). This approach makes these user-defined tokens
-non-native, meaning the underlying blockchain’s fundamental structure
-does not directly support them, -- which can lead to inefficiencies, higher
+non-native, meaning the underlying blockchain's fundamental structure
+does not directly support them, – which can lead to inefficiencies, higher
 costs, and increased complexity. In Cardano, all tokens are native, which
 means developers can create and manage their own tokens without relying
 on complex smart contracts. These tokens are treated as first-class
@@ -34,7 +34,8 @@ is more straightforward than writing and deploying custom contracts. Native
 tokens integrate seamlessly with wallets, tools, and the wider ecosystem.
 
 One can read more about the security advantages of native tokens on Cardano
-in the <<chapter8-cardano-security, Cardano security>> section.
+in the Mastering Cardano section
+https://github.com/input-output-hk/mastering-cardano/blob/main/chapters/chapter-08-writing-smart-contracts-plutusv3.adoc#cardano-security[Cardano security].
 Before looking at an example of a minting
 policy, let us look again at the Haskell definition of the [purple]#Value# type.
 This type is defined in the module `PlutusLedgerApi.V1.Value` and defines an
@@ -347,7 +348,7 @@ deno run -A signed-minting.ts
 
 We can then check the transaction details again on the
 http://preview.cardanoscan.io/[preview.cardanoscan.io] webpage.
-This was an example of minting fungible tokens. Fungibility(((fungible))) means
+This was an example of minting fungible tokens. Fungibility means
 that one token is interchangeable with another token of the same type,
 meaning each unit has the same value as any other unit.
 
@@ -357,8 +358,8 @@ minting policy is referencing something unique on the blockchain,
 and for that, we use UTXOs. UTXOs can exist only once, and once consumed
 as input to a transaction, they can never exist again. UTXOs are defined
 by transaction hashes, which are unique, and by output indices. The reason
-every transaction has a unique hash was explained in section
-<<chapter8-script-context-explained, Script context explained>>.
+every transaction has a unique hash was explained in lesson 4
+_Script context explained_.
 
 When minting an NFT, the idea is to include a specific parameter in the
 minting policy – namely, a UTXO transaction hash and ID – and have the policy
@@ -435,7 +436,7 @@ we could also leave our policy to take in the transaction output
 reference as a whole and then model that in our off-chain code. In our code,
 we wanted to show how to split up such a variable and correctly apply
 the [blue]#unsafeFromBuiltinData# to individual parts. Next, we present the
-off-chain code that interacts with our NFT minting policy(((NFT, minting policy))).
+off-chain code that interacts with our NFT minting policy.
 
 [source,typescript]
 ----
@@ -485,8 +486,8 @@ and define our provider and wallet. After that, we set our wallet
 address and read out the first UTXO sitting at our wallet address.
 We will use this UTXO to parameterize our minting policy and also
 spend it when creating the minting transaction. Next we define our
-NFT minting policy(((NFT, minting policy))). We again shortened the
-compiled code and parameterize the code with the transaction hash and output index of the UTXO we
+NFT minting policy. We again shortened the compiled code and parameterize
+the code with the transaction hash and output index of the UTXO we
 selected. We also provide the name of our NFT we want to mint. Now
 we can look at the function that mints the NFT.
 
@@ -543,27 +544,26 @@ referenced from the https://ipfs.tech/[InterPlanetary file system] or
 embedded as a https://en.wikipedia.org/wiki/Base64[base64] encoded string
 into the datum metadata of the token or NFT. For more information, see
 https://cips.cardano.org/cip/CIP-68[CIP-68]
-that defines the datum metadata standard.
-The https://meshjs.dev/apis/txbuilder/minting#mintingCip68[MeshJS docs] provide
-an example of how to mint assets with the CIP-68(((CIP-68))) metadata standard.
+that defines the datum metadata standard. The
+https://meshjs.dev/apis/txbuilder/minting#minting-assets-with-cip-68-metadata-standard[MeshJS docs]
+provide an example of how to mint assets with the CIP-68 metadata standard.
 
-At the end of this section, we note that the utility of a token can be determined by its use
+At the end of this lesson, we note that the utility of a token can be determined by its use
 case, the market, or the community that issues and adopts it. Tokens can be
 used for various purposes such as issuing a new cryptocurrency, representing access
-rights, or enabling in-app transactions. Native tokens(((native tokens))) enable a wide range of
+rights, or enabling in-app transactions. Native tokens enable a wide range of
 applications by combining secure on-chain logic with the flexibility of custom
 asset creation. From the
 https://iohk.io/en/blog/posts/2025/05/09/native-tokens-in-the-extended-utxo-model/[IO
 blog on native tokens] we get the following use cases for native tokens:
 
-* Digital collectibles and credentials. NFTs(((NFT))) can represent ownership of digital
+* Digital collectibles and credentials. NFTs can represent ownership of digital
 art, in-game assets, event tickets, or even academic credentials – benefiting
 from the security and transparency of the Cardano ledger.
 * Supply chain and asset tracking. Tokens can represent physical items and track
 their journey across a supply chain. Because native tokens can be uniquely defined
 and managed without smart contracts, this approach is more efficient and secure.
-* Algorithmic stablecoins(((algorithmic stablecoin))).
-Native tokens can represent assets with values tied to
+* Algorithmic stablecoins. Native tokens can represent assets with values tied to
 external references. Forging policy scripts define the rules that keep these tokens
 stable, enabling automated monetary policies and more robust decentralized finance
 (DeFi) primitives.
