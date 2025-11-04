@@ -34,7 +34,7 @@ offering better performance. Low-level validation scripts are referred
 to as _untyped validation scripts_, while high-level scripts are known as
 _typed validation scripts_.
 
-The <span style="color: purple;">BuiltinData</span> doesn’t have its constructors exposed. The module
+The <span style="color: purple;">BuiltinData</span> doesn't have its constructors exposed. The module
 that defines <span style="color: purple;">BuiltinData</span> contains two conversion functions:
 <span style="color: blue;">builtinDataToData</span> and <span style="color: blue;">dataToBuiltinData</span>, that can
 convert <span style="color: purple;">BuiltinData</span> back and forth to the <span style="color: purple;">Data</span> type. These functions
@@ -166,7 +166,7 @@ Next, we import several submodules from the `PlutusLedgerApi` and the `PlutusTx`
 modules that define functions for working with PlutusV3 scripts.
 
 After that, the on-chain validator code follows. We name the validator function
-<span style="color: blue;">mkGiftValidator</span> -- which means _make gift validator_. It is an untyped validator
+<span style="color: blue;">mkGiftValidator</span> – which means _make gift validator_. It is an untyped validator
 that always succeeds. It takes in the script context as the only argument, which is
 of type <span style="color: purple;">BuiltinData</span>, and returns something of type <span style="color: purple;">BuiltinUnit</span>.
 In the body of the function, the script context is ignored, and we use the <span style="color: blue;">check</span>
@@ -713,7 +713,7 @@ the `"compiledCode"` fields.
 ```
 
 We also show the `cabal.project` and `.cabal` files we use to compile the code.
-Let’s look at the `cabal.project` file.
+Let's look at the `cabal.project` file.
 
 ```haskell
 repository cardano-haskell-packages
@@ -740,7 +740,7 @@ packages:
 In the file, we define the
 [CHAP repository](https://github.com/IntersectMBO/cardano-haskell-packages)
 that contains all Haskell packages used by Cardano that are not hosted on
-[Hackage](https://hackage.haskell.org/), the Haskell community’s central package
+[Hackage](https://hackage.haskell.org/), the Haskell community's central package
 archive. When compiling the project, the `cabal` tool can then
 download the Plutus packages defined in the `.cabal` file. Next, we look at the
 `.cabal` file.

@@ -96,7 +96,7 @@ npm install -g deno
 
 Let us look now at off-chain code that interacts with the vesting smart
 contract `vestingVal` that we defined in the previous lesson. Our code
-will reside in a TypeScript file to leverage some of the type system’s features.
+will reside in a TypeScript file to leverage some of the type system's features.
 
 ```typescript
 import {
@@ -386,7 +386,7 @@ transaction. We first set the network and then use the <span style="color: blue;
 function to redeem our vested UTXO. It takes in the UTXO we want to
 redeem, the script at which the UTXO is residing, and the redeemer.
 The redeemer is optional and could be skipped. The same goes for
-the datum, which we haven’t provided here because we have inlined
+the datum, which we haven't provided here because we have inlined
 the datum to the UTXO we are claiming.
 
 Next, we set the validity interval for the transaction with the
@@ -522,7 +522,7 @@ async function sendFunds(amount: string): Promise<string> {
 ```
 
 We define the <span style="color: blue;">sendFunds</span> function similar to the previous
-vesting example. The difference is that this time we don’t specify a
+vesting example. The difference is that this time we don't specify a
 datum in the <span style="color: blue;">sendLovelace</span> function. This means we will create
 a UTXO without a datum. After that, we can deploy our parameterized
 vesting script to a UTXO.

@@ -124,13 +124,13 @@ We name the module `Week03.Vesting` since the idea for the vesting contract
 comes from the _Week03_ examples from the Plutus pioneer program.
 
 Then we define our <span style="color: purple;">VestingDatum</span> datum type. It contains the
-beneficiary’s public key hash and the deadline in the form of <span style="color: purple;">POSIXTime</span>
+beneficiary's public key hash and the deadline in the form of <span style="color: purple;">POSIXTime</span>
 after which the funds can be claimed. Because we are defining a custom data
 type, we need to use the <span style="color: blue;">makeIsDataSchemaIndexed</span> function that generates
 the <span style="color: purple;">ToData</span>, <span style="color: purple;">FromData</span>, <span style="color: purple;">UnsafeFromData</span>, and
 <span style="color: purple;">HasBlueprintSchema</span> instances for our custom type. As stated in
 a previous lesson, we use Template Haskell, which requires adding two single
-quotes in front of the type to return the type’s name.
+quotes in front of the type to return the type's name.
 
 Next comes the code for the validator. The validation logic says
 that the funds can be unlocked only when the deadline has been
@@ -207,7 +207,7 @@ serializedParamVestingVal = serialiseCompiledCode compiledParamVestingVal
 ```
 
 First, we create the <span style="color: purple;">VestingParams</span> type, which was previously called
-<span style="color: purple;">VestingDatum</span>. It holds the beneficiary’s public key hash and the
+<span style="color: purple;">VestingDatum</span>. It holds the beneficiary's public key hash and the
 deadline after which the beneficiary can claim the funds. Then we again use
 Template Haskell and generate the necessary instances for our custom type.
 We also use the <span style="color: blue;">makeLift</span> function that generates for our custom data
@@ -234,9 +234,9 @@ data that you can pass at runtime to a script function if you create an instance
 of the <span style="color: purple;">Lift</span> type class.
 
 Next comes the validator code. The type signature of the validator function
-changes so it takes the additional vesting parameter. While our example only uses one parameter, it’s worth noting note that a
+changes so it takes the additional vesting parameter. While our example only uses one parameter, it's worth noting note that a
 validator function can take any number of parameters. In the body of the validator function, we now read the deadline and
-the beneficiary’s public key hash from the vesting parameter. Apart from that,
+the beneficiary's public key hash from the vesting parameter. Apart from that,
 the logic of the validator stays the same. Then the validator gets compiled and
 serialized. When compiling the validator, another type parameter needs to be
 added to the type signatures, and we also need to apply the <span style="color: blue;">unsafeFromBuiltinData</span>

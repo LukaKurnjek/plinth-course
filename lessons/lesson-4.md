@@ -46,7 +46,7 @@ data ScriptInfo
 ```
 
 The script information contains information about the
-script’s purpose. If a transaction tries to mint a native asset, the script info
+script's purpose. If a transaction tries to mint a native asset, the script info
 contains the <span style="color: purple;">MintingScript</span> data constructor that carries the
 <span style="color: purple;">CurrencySymbol</span> data type.
 
@@ -256,7 +256,7 @@ being validated. In the beginning, it contains a list of transaction inputs
 and reference inputs. Reference inputs are inputs accessible by the script
 context but not consumed by the transaction. They are only referenced, hence
 the name. A transaction may need access to a UTXO without consuming it
-because the UTXO’s datum can contain important information that
+because the UTXO's datum can contain important information that
 scripts can access. This information can be arbitrary data contained in
 the datum or an attached reference script, which is a serialized smart
 contract compiled to Plutus. The advantage of reference scripts is that
@@ -429,8 +429,8 @@ following certificates:
 7. Unregister a DRep with mandatory refund value
 8. A digest of the PoolParams
 9. The retirement certificate and the epoch when the retirement will take place
-10. Authorize a Hot credential for a specific committee member’s cold credential
-11. Resign committee member’s cold credential.
+10. Authorize a Hot credential for a specific committee member's cold credential
+11. Resign committee member's cold credential.
 
 After certificates comes the data that manages withdrawals of staking rewards.
 The data is contained in a <span style="color: purple;">Map</span> of credentials to lovelace. Next follows
