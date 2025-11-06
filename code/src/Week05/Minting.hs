@@ -104,3 +104,42 @@ compiledNftVal = $$(compile [||wrappedVal||])
 
 serializedNFTVal :: SerialisedScript
 serializedNFTVal = serialiseCompiledCode compiledNftVal
+
+{- ------------------------------------------------------------------------------------------ -}
+{- ---------------------------------- NFT IMAGE VALIDATOR ----------------------------------- -}
+
+{-# INLINEABLE nftImgVal #-}
+nftImgVal :: TxOutRef -> ScriptContext -> Bool
+nftImgVal oref ctx =
+  traceIfFalse "UTxO not consumed" checkHasUTxO && 
+  traceIfFalse "You can only mint one!" checkMintedAmount
+ where
+  checkHasUTxO :: Bool
+  checkHasUTxO = any (\i -> txInInfoOutRef i == oref) $ txInfoInputs info
+
+  checkMintedAmount :: Bool
+  checkMintedAmount = case flattenValue (txInfoMint info) of
+    [(_, _, amt1), (_, _, amt2)] -> amt1 == 1 && amt2 == 1
+    _               -> False
+
+  info :: TxInfo
+  info = scriptContextTxInfo ctx
+
+{- ------------------------------------------------------------------------------------------ -}
+{- ---------------------------------------- HELPERS ----------------------------------------- -}
+
+compiledNftImgVal :: CompiledCode (BuiltinData -> BuiltinData -> BuiltinData -> BuiltinUnit)
+compiledNftImgVal = $$(compile [||wrappedVal||])
+ where
+  wrappedVal :: BuiltinData -> BuiltinData -> BuiltinData -> BuiltinUnit
+  wrappedVal tid idx ctx =
+    let oref :: TxOutRef
+        oref = TxOutRef
+          (TxId $ unsafeFromBuiltinData tid)
+          (unsafeFromBuiltinData idx)
+    in check $ nftImgVal
+                 oref
+                 (unsafeFromBuiltinData ctx)
+
+serializedNftImgVal :: SerialisedScript
+serializedNftImgVal = serialiseCompiledCode compiledNftImgVal

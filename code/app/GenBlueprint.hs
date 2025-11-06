@@ -48,6 +48,7 @@ blueprint =
           , vestingValidatorMix
           , signedValidator
           , nftValidator
+          , nftImgValidator
           ]
     , contractDefinitions =
         deriveDefinitions
@@ -336,4 +337,29 @@ nftValidator =
     , validatorDatum = Nothing
     , validatorCompiledCode =
         Just . Short.fromShort $ Minting.serializedNFTVal
+    }
+
+nftImgValidator :: ValidatorBlueprint referencedTypes
+nftImgValidator =
+  MkValidatorBlueprint
+    { validatorTitle = "NFT image minting policy"
+    , validatorDescription = Just "Policy that allows minting a NFT with an embedded image"
+    , validatorParameters =
+        [ MkParameterBlueprint
+            { parameterTitle = Just "TxOutRef"
+            , parameterDescription = Just "Reference to the UTxO to consume to be able to mint the NFT"
+            , parameterPurpose = Set.singleton Mint
+            , parameterSchema = definitionRef @TxOutRef
+            }
+        ]
+    , validatorRedeemer =
+        MkArgumentBlueprint
+          { argumentTitle = Just "Redeemer"
+          , argumentDescription = Nothing
+          , argumentPurpose = Set.singleton Mint
+          , argumentSchema = definitionRef @()
+          }
+    , validatorDatum = Nothing
+    , validatorCompiledCode =
+        Just . Short.fromShort $ Minting.serializedNftImgVal
     }
