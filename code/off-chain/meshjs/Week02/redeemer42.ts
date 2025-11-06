@@ -1,7 +1,7 @@
 
 /*
-Off-chain code for the redeemer 42 validators defined in 
-https://github.com/input-output-hk/plutus-pioneer-program/blob/plinth-plutusV3/src/Week02/Validators.hs
+Off-chain code for the redeemer 42 validators defined in
+https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/code/src/Week02/Validators.hs 
 
 NOTES: Uncomment the function calls at the end. Run each call separetly. 
        If a function call requires input data as a transaction hash provide it. 

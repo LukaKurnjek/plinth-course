@@ -1,9 +1,9 @@
 /*
 Off-chain code for the NFT image validator (nftImgVal) defined in 
-https://github.com/LukaKurnjek/ppp-plutusV3-plinth/blob/main/src/Week05/Minting.hs
+https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/code/src/Week05/Minting.hs
 
-Code currently produces an NFT where the image is not visible. 
-NOTES: Before running the code input a blockfrost key for preview in line 30. 
+Code currently produces an NFT where the image is embedded as metadata. 
+NOTES: Before running the code input a blockfrost key for preview in line 29. 
 */
 
 import {
@@ -26,9 +26,7 @@ import { secretSeed } from "./seed.ts";
     export const secretSeed = ["seed1", "seed2", ... ] */
 
 // Define blockchain provider and wallet
-const provider: BlockfrostProvider = new BlockfrostProvider(
-  "<blockfrost_key>",
-);
+const provider: BlockfrostProvider = new BlockfrostProvider("<blockfrost_key>");
 const wallet: MeshWallet = new MeshWallet({
   networkId: 0, //0=testnet, 1=mainnet
   fetcher: provider,
