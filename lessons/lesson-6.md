@@ -19,7 +19,7 @@ active development.
 Another way for constructing off-chain transactions is by using the
 [Cardano CLI](https://github.com/IntersectMBO/cardano-cli). You can
 find examples and read more about the Cardano CLI on the
-[Cardano developers](https://developers.cardano.org/docs/get-started/cardano-cli/get-started/)
+[Cardano developers](https://developers.cardano.org/docs/get-started/cardano-cli/basic-operations/get-started)
 webpage. There are also several community-built tools for writing off-chain code in
 various programming languages. Some of them are: 
 
