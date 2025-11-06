@@ -528,10 +528,12 @@ class is defined by both the token name and its unique currency symbol.
 It is also possible to associate an image with a token or NFT. It can be
 referenced from the [InterPlanetary file system](https://ipfs.tech/) or
 embedded as a [base64](https://en.wikipedia.org/wiki/Base64) encoded string
-into the datum metadata of the token or NFT. For more information, see
-[CIP-68](https://cips.cardano.org/cip/CIP-68)
+into the datum metadata of the token or NFT. The _code/_ folder of the plint
+course contains the [nft-image.ts](https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/blob/main/code/off-chain/meshjs/Week05/nft-image.ts)
+file that shows how to mint a NFT with an embeded image that Lace displays. 
+For more information, see [CIP-68](https://cips.cardano.org/cip/CIP-68)
 that defines the datum metadata standard. The
-[MeshJS docs](https://meshjs.dev/apis/txbuilder/minting#minting-assets-with-cip-68-metadata-standard)
+[MeshJS docs](https://meshjs.dev/apis/txbuilder/minting#minting-assets-with-cip-68-metadata-standard) also
 provide an example of how to mint assets with the CIP-68 metadata standard.
 
 At the end of this lesson, we note that the utility of a token can be determined by its use
