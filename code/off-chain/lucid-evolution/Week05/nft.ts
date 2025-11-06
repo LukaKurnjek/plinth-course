@@ -1,7 +1,7 @@
 
 /*
 Off-chain code for the NFT validator (nftVal) defined in 
-https://github.com/input-output-hk/plutus-pioneer-program/blob/plinth-plutusV3/src/Week05/Minting.hs
+https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/code/src/Week05/Minting.hs
 
 NOTES: Before running the code input a blockfrost key for preview in line 29. 
 */

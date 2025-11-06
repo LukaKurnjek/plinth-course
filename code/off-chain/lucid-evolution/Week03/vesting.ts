@@ -1,7 +1,7 @@
 
 /*
 Off-chain code for the vesting validator (vestingVal) defined in 
-https://github.com/input-output-hk/plutus-pioneer-program/blob/plinth-plutusV3/src/Week03/Vesting.hs
+https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/code/src/Week03/Vesting.hs
 
 NOTES: Uncomment the function calls at the end. Run each call separetly. 
        Before running the code input a blockfrost key for preview in line 30. 
