@@ -18,4 +18,5 @@ To learn more about the Aiken smart contract language see:
   * [Examples](https://aiken-lang.org/example--hello-world/basics)
   * [Common Design Patterns](https://aiken-lang.org/fundamentals/common-design-patterns)
   * [What I wish I knew](https://aiken-lang.org/fundamentals/what-i-wish-i-knew)
+* [I can Aiken](https://github.com/cardano-foundation/cardano-academy/tree/main/books/i-can-aiken) book by John Greene
 * [Awsome Aiken](https://github.com/aiken-lang/awesome-aiken) repository 
