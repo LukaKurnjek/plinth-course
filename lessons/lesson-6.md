@@ -137,7 +137,7 @@ export const secretSeed = ["seed1", "seed2", ... ];
 
 For instructions on how to create a wallet and generate a seed phrase, see
 [lesson 2](https://github.com/iohkedu/cardano-education-program/blob/main/lace-course/lessons/02-installing-lace/README.md)
-of the Lace course that showcases how to install a Lace wallet and generate
+of the Lace module that showcases how to install a Lace wallet and generate
 a seed phrase. For more information on wallets check out the chapter
 [Cardano digital wallets](https://github.com/input-output-hk/mastering-cardano/blob/main/chapters/chapter-06-wallets-in-the-world-of-cardano.adoc) from the Mastering Cardano book.
 
@@ -197,7 +197,7 @@ takes the raw script `CBORHEX` from the blueprint and formats it in
 the correct way. The compiled code in our code snippet is shortened.
 When running this off-chain code, the full compiled code of the validator
 has to be provided. That can be found in the `blueprint.json` file in the
-_code/_ folder of this course. Now we can send some funds to the vesting script.
+_code/_ folder of this module. Now we can send some funds to the vesting script.
 
 ```typescript
 // Function for creating UTXO at vesting script
@@ -375,7 +375,7 @@ const redeemer: Pick<Action, "data"> = { data: BigInt(42) };
 
 The number is, of course, code specific. You can find off-chain code for
 the 42 validator example we have presented in a previous lesson in the _code/_
-folder of this course. For more examples see the MeshJS resources listed at
+folder of this module. For more examples see the MeshJS resources listed at
 the end of this lesson.
 
 After defining the redeemer, we define the start slot for
@@ -495,7 +495,7 @@ that we will apply to the parameterized script and that contains our own
 public key hash and the deadline we have defined. Next we define our
 parameterized vesting script. We again shorten the `CBORHEX` compiled
 code. The full compiled code can be found in the `blueprint.json` file that
-resides in the _code/_ folder of this course.
+resides in the _code/_ folder of this module.
 We now use the function <span style="color: blue;">applyParamsToScript</span> and add the
 script parameter we have previously defined. If there were more
 than one parameter, we would enter all of them in the list in the

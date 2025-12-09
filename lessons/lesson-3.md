@@ -159,7 +159,7 @@ Plinth coding. One can read more about GHC language pragmas at the
 links to official GHC documentation. The
 [GHC docs](++https://downloads.haskell.org/ghc/latest/docs/users_guide/using-optimisation.html#ghc-flag--ffull-laziness++)
 also cover various GHC compiler options. We name our module `Week02.Validators`.
-The naming of modules in this course code examples follows the naming from the
+The naming of modules in the code examples follows the naming from the
 [fourth iteration](https://github.com/input-output-hk/plutus-pioneer-program/tree/fourth-iteration)
 of the Plutus pioneer program.
 Next, we import several submodules from the `PlutusLedgerApi` and the `PlutusTx`
@@ -632,8 +632,8 @@ if we have a parameterized validator, redeemer information, datum information,
 and the compiled code, which we reference from the `Week02.Validators` module
 that we have imported. One can extend the blueprint code such that it generates
 the data and compiled code for all six validators that we defined in this lesson.
-All validators presented in this course can be found in the _code/_
-folder of this course, which also contains a `blueprint.json` file
+All validators presented in this module can be found in the _code/_
+folder of this module, which also contains a `blueprint.json` file
 with all compiled validator code. Below is an example blueprint for the blueprint
 code we have defined in this lesson. The compiled validator code is contained in
 the `"compiledCode"` fields.
@@ -815,10 +815,10 @@ cabal run
 ```
 
 At the end, we note that the `.cabal` file shown here lists all Plutus libraries
-needed to compile any Plutus code presented in the Plinth course.
+needed to compile any Plutus code presented in the Plinth module.
 It can be reused when compiling code from other lessons that follow this one.
 One only needs to add the module names under the `exposed-modules:`
 section and update the `GenBlueprint.hs` file with additional blueprint
 definitions. As already mentioned, all Plinth validator code presented in this
-course, including blueprint and cabal configuration files, can be found at the
-_code/_ folder of the Plinth course.
+module, including blueprint and cabal configuration files, can be found at the
+_code/_ folder of the Plinth module.

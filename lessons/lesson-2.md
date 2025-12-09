@@ -10,7 +10,7 @@ options:
 
 The [plinth-template](https://github.com/IntersectMBO/plinth-template/tree/main)
 GitHub repository provides instructions for the above mentioned options.
-The smart contract code presented throughout this course uses features
+The smart contract code presented throughout this module uses features
 introduced in the Chang hard fork, which enabled PlutusV3. The
 development environment you will use to run and test this code needs to
 support these features. The smart contract code was compiled with a Nix

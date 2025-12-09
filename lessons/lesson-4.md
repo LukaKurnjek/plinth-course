@@ -152,7 +152,8 @@ following script purposes:
 * Certifying - for issuing certificates
 * Voting and proposing - used when government actions are involved.
 
-In this course code examples, we will focus on the spending and minting script purposes.
+In the code examples presenten in the Plinth module, we will focus on
+the spending and minting script purposes.
 
 ## Decoding the script information in untyped form
 
