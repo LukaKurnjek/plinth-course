@@ -1,6 +1,6 @@
-# Code for the Plinth course
+# Code for the Plinth module
 
-This folder contains PlutusV3 validator code presented in the Plinth course.
+This folder contains PlutusV3 validator code presented in the Plinth module.
 The validator code is contained in the `src` folder.
 The code in this branch can be compiled with a nix shell provided by the 
 [plinth-template](https://github.com/IntersectMBO/plinth-template/tree/main) 
