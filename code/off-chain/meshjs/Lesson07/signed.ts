@@ -1,7 +1,7 @@
 
 /*
 Off-chain code for the signed validator (signedVal) defined in 
-https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/code/src/Week05/Minting.hs
+https://github.com/iohkedu/cardano-education-program/tree/main/plinth-module/code/src/Lesson07/Minting.hs
 
 NOTES: Before running the code input a blockfrost key for preview in line 25. 
 */

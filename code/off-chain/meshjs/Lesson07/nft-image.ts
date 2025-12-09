@@ -1,6 +1,6 @@
 /*
 Off-chain code for the NFT image validator (nftImgVal) defined in 
-https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/code/src/Week05/Minting.hs
+https://github.com/iohkedu/cardano-education-program/tree/main/plinth-module/code/src/Lesson07/Minting.hs
 
 Code currently produces an NFT where the image is embedded as metadata. 
 NOTES: Before running the code input a blockfrost key for preview in line 29. 

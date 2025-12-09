@@ -529,7 +529,7 @@ It is also possible to associate an image with a token or NFT. It can be
 referenced from the [InterPlanetary file system](https://ipfs.tech/) or
 embedded as a [base64](https://en.wikipedia.org/wiki/Base64) encoded string
 into the datum metadata of the token or NFT. The _code/_ folder of the Plinth
-module contains the [nft-image.ts](https://github.com/iohkedu/cardano-education-program/tree/main/plinth-course/blob/main/code/off-chain/meshjs/Week05/nft-image.ts)
+module contains the [nft-image.ts](https://github.com/iohkedu/cardano-education-program/tree/main/plinth-module/blob/main/code/off-chain/meshjs/Week05/nft-image.ts)
 file that shows how to mint a NFT with an embeded image that Lace displays. 
 For more information, see [CIP-68](https://cips.cardano.org/cip/CIP-68)
 that defines the datum metadata standard. The
