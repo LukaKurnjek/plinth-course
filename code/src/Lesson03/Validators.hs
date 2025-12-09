@@ -25,7 +25,7 @@
 {-# OPTIONS_GHC -fno-unbox-strict-fields #-}
 {-# OPTIONS_GHC -fplugin-opt PlutusTx.Plugin:target-version=1.1.0 #-}
 
-module Week02.Validators where
+module Lesson03.Validators where
 
 import GHC.Generics                  (Generic)
 import PlutusLedgerApi.Common        (FromData (fromBuiltinData), 

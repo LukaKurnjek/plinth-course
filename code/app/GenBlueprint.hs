@@ -16,9 +16,9 @@ import qualified Data.Set                    as Set
 import           PlutusTx.Blueprint
 import           PlutusLedgerApi.Data.V3     (PubKeyHash)
 import           PlutusLedgerApi.V3          (TokenName, TxOutRef)
-import qualified Week02.Validators           as Week02
-import qualified Week03.Vesting              as Vesting
-import qualified Week05.Minting              as Minting
+import qualified Lesson03.Validators           as Lesson03
+import qualified Lesson05.Vesting              as Vesting
+import qualified Lesson07.Minting              as Minting
 
 {- -------------------------------------------------------------------------------------------- -}
 {- ---------------------------------------- ENTRY POINT --------------------------------------- -}
@@ -74,7 +74,7 @@ preamble =
     }
 
 {- -------------------------------------------------------------------------------------------- -}
-{- ------------------------------------ VALIDATORS - WEEK02 ----------------------------------- -}
+{- ----------------------------------- VALIDATORS - Lesson03 ---------------------------------- -}
 
 mkGiftVal :: ValidatorBlueprint referencedTypes
 mkGiftVal =
@@ -91,7 +91,7 @@ mkGiftVal =
           }
     , validatorDatum = Nothing
     , validatorCompiledCode =
-        Just . Short.fromShort $ Week02.serializedMkGiftValidator
+        Just . Short.fromShort $ Lesson03.serializedMkGiftValidator
     }
 
 mkBurnVal :: ValidatorBlueprint referencedTypes
@@ -109,7 +109,7 @@ mkBurnVal =
           }
     , validatorDatum = Nothing
     , validatorCompiledCode =
-        Just . Short.fromShort $ Week02.serializedMkBurnValidator
+        Just . Short.fromShort $ Lesson03.serializedMkBurnValidator
     }
 
 mk42ValLarge :: ValidatorBlueprint referencedTypes
@@ -127,7 +127,7 @@ mk42ValLarge =
           }
     , validatorDatum = Nothing
     , validatorCompiledCode =
-        Just . Short.fromShort $ Week02.serializedMk42ValidatorLarge
+        Just . Short.fromShort $ Lesson03.serializedMk42ValidatorLarge
     }
 
 mk42ValSmall :: ValidatorBlueprint referencedTypes
@@ -145,7 +145,7 @@ mk42ValSmall =
           }
     , validatorDatum = Nothing
     , validatorCompiledCode =
-        Just . Short.fromShort $ Week02.serializedMk42ValidatorSmall
+        Just . Short.fromShort $ Lesson03.serializedMk42ValidatorSmall
     }
 
 mk42TypedVal :: ValidatorBlueprint referencedTypes
@@ -163,7 +163,7 @@ mk42TypedVal =
           }
     , validatorDatum = Nothing
     , validatorCompiledCode =
-        Just . Short.fromShort $ Week02.serializedMk42TypedValidator
+        Just . Short.fromShort $ Lesson03.serializedMk42TypedValidator
     }
 
 mk42CustomVal :: ValidatorBlueprint referencedTypes
@@ -181,7 +181,7 @@ mk42CustomVal =
           }
     , validatorDatum = Nothing
     , validatorCompiledCode =
-        Just . Short.fromShort $ Week02.serializedMk42CustomValidator
+        Just . Short.fromShort $ Lesson03.serializedMk42CustomValidator
     }
 
 read42ValSmall :: ValidatorBlueprint referencedTypes
@@ -199,11 +199,11 @@ read42ValSmall =
           }
     , validatorDatum = Nothing
     , validatorCompiledCode =
-        Just . Short.fromShort $ Week02.serializedRead42ValidatorSmall
+        Just . Short.fromShort $ Lesson03.serializedRead42ValidatorSmall
     }
 
 {- -------------------------------------------------------------------------------------------- -}
-{- ------------------------------------ VALIDATORS - WEEK03 ----------------------------------- -}
+{- ----------------------------------- VALIDATORS - Lesson05 ---------------------------------- -}
 
 vestingValidator :: ValidatorBlueprint referencedTypes
 vestingValidator =
@@ -281,7 +281,7 @@ vestingValidatorMix =
     }
 
 {- -------------------------------------------------------------------------------------------- -}
-{- ------------------------------------ VALIDATORS - WEEK05 ----------------------------------- -}
+{- ----------------------------------- VALIDATORS - Lesson07 ---------------------------------- -}
 
 signedValidator :: ValidatorBlueprint referencedTypes
 signedValidator =

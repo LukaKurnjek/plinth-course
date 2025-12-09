@@ -13,9 +13,9 @@ library scripts
   import:         options
   hs-source-dirs: src
   exposed-modules:
-    Week02.Validators
-    Week03.Vesting
-    Week05.Minting
+    Lesson03.Validators
+    Lesson05.Vesting
+    Lesson07.Minting
 
   build-depends:
     , base

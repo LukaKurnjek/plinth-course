@@ -26,7 +26,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fplugin-opt PlutusTx.Plugin:target-version=1.1.0 #-}
 
-module Week03.Vesting where
+module Lesson05.Vesting where
 
 import           GHC.Generics                  (Generic)
 import           PlutusLedgerApi.Common        (FromData (fromBuiltinData),
