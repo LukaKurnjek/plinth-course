@@ -1,1 +1,1 @@
-This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, see https://creativecommons.org/licenses/by-nc-sa/4.0/[Attribution-NonCommercial-ShareAlike 4.0 International - Creative Commons]. 
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, see [Attribution-NonCommercial-ShareAlike 4.0 International - Creative Commons](https://creativecommons.org/licenses/by-nc-sa/4.0/). 
