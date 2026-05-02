@@ -4,7 +4,9 @@
   <img src="images/plinth.png" alt="Plinth logo" width="200" />
 </p>
 
-Welcome to the Plinth module! This module is designed to teach you the basics of writing Cardano smart contracts with the Plinth smart contract language. Plinth is a Turing-complete general-purpose smart contract language that focuses on security. It draws from modern language research to provide a safe, full-stack programming environment based on Haskell, the leading purely functional programming language. Beside learning how to code Plinth smart contracts, this module also showcases off-chain code examples with the use of the [MeshJS](https://meshjs.dev/) library. 
+Welcome to the Plinth module! This module is designed to teach you the basics of writing Cardano smart contracts with the Plinth smart contract language. The majority of the content is taken from the _Writing smart contracts_ chapter from the [Mastering Cardano](https://github.com/input-output-hk/mastering-cardano/tree/v1.1.1) book, version 1.1.1. 
+
+Plinth is a Turing-complete general-purpose smart contract language that focuses on security. It draws from modern language research to provide a safe, full-stack programming environment based on Haskell, the leading purely functional programming language. Beside learning how to code Plinth smart contracts, this module also showcases off-chain code examples with the use of the [MeshJS](https://meshjs.dev/) library. 
 
 The material in this module is provided for educational purposes only.
 
@@ -27,3 +29,7 @@ The following lessons are covered:
 - Lesson 6: [Off-chain code with MeshJS](lessons/lesson-6.md)
 - Lesson 7: [Minting policies and native tokens](lessons/lesson-7.md)
 - [Further learning resources](lessons/learning-resources.md)
+
+# Lincense 
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0). The Mastering Cardano book v.1.1.1 from which the content is taken is also published under the CC BY-NC-SA 4.0 lincense. To view a copy of this license, see https://creativecommons.org/licenses/by-nc-sa/4.0/[Attribution-NonCommercial-ShareAlike 4.0 International - Creative Commons]. 
